@@ -22,3 +22,6 @@ cp -rv ./config/sxhkd/* ~/.config/sxhkd/
 echo "Setting files for wallpaper:"
 mkdir -pv ~/.config/wallpaper 
 cp -rv ./config/wallpaper/* ~/.config/wallpaper/
+
+echo "Setting .vimrc:"
+cp -v ./config/.vimrc ~/.vimrc

@@ -14,3 +14,7 @@ echo "Getting files from sxhkd:"
 cp -rv ~/.config/sxhkd/* ./config/sxhkd/
 echo "Getting files from wallpaper:"
 cp -rv ~/.config/wallpaper/* ./config/wallpaper/
+
+
+echo "Getting .vimrc:"
+cp -v ~/.vimrc ./config/.vimrc
