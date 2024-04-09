@@ -2,11 +2,11 @@
 
 " PLUGINS vim-plug (https://github.com/junegunn/vim-plug)
 call plug#begin()
-Plug 'kien/rainbow_parentheses.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'unblevable/quick-scope'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " APPEARANCE
@@ -36,6 +36,8 @@ nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
+map <F2> :NERDTreeToggle<CR>
+
 " PLUGIN BEHAVIOR:
      " NERDTREE
      " Start NERDTree when Vim is started without file arguments.
@@ -49,3 +51,4 @@ nmap <silent> <c-l> :wincmd l<CR>
 
      " Trigger a highlight in the appropriate direction when pressing these keys:
      let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
