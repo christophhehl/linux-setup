@@ -25,6 +25,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+Plug 'valloric/youcompleteme'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'jistr/vim-nerdtree-tabs'
 " THEMES:
@@ -42,7 +43,7 @@ packadd! matchit
 
 " APPEARANCE {{{
 
-colorscheme onedark
+colorscheme gruvbox
 
 syntax enable
 set number
@@ -114,24 +115,30 @@ nmap <Leader>l :resize -2<CR>
 
 " PLUGIN BEHAVIOR: {{{
 
-     " NERDTREE
-     " Start NERDTree when Vim is started without file arguments.
-     autocmd StdinReadPre * let s:std_in=1
-     autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-     " Close the tab if NERDTree is the only window remaining in it.
-     autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-     " let g:nerdtree_tabs_open_on_console_startup = 2
+	" NERDTREE
+	" Start NERDTree when Vim is started without file arguments.
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+	" Close the tab if NERDTree is the only window remaining in it.
+	autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	" let g:nerdtree_tabs_open_on_console_startup = 2
 
-     " VIM-AIRLINE
-     " let g:airline_powerline_fonts = 1
-     " let g:airline_theme='murmur'
-     let g:airline_theme='onedark'
-     let g:airline#extensions#tabline#enabled = 1
+	" VIM-AIRLINE
+	" let g:airline_powerline_fonts = 1
+	" let g:airline_theme='murmur'
+	let g:airline_theme='onedark'
+	let g:airline#extensions#tabline#enabled = 1
 
-     " INDENT GUIDES
-     " let g:indent_guides_enable_on_vim_startup = 1
-     " let g:indent_guides_guide_size = 1
-     " set tabstop=4
+	" INDENT GUIDES
+	" let g:indent_guides_enable_on_vim_startup = 1
+	" let g:indent_guides_guide_size = 1
+	" set tabstop=4
+
+	" CTRLP
+	let g:ctrlp_show_hidden=1
+
+	" YCM
+	let g:ycm_autoclose_preview_window_after_completion=1
 
 " }}}
 
