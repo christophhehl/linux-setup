@@ -53,8 +53,6 @@ return {
     lualine.setup({
       options = {
         theme = my_lualine_theme,
-	section_separators = '',  -- remove if nerdfont available
-	component_separators = '' -- remove if nerdfont available
       },
       sections = {
         lualine_x = {
