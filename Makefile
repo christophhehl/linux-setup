@@ -1,11 +1,22 @@
 local_conf := ~/.config/
 git_conf := ./config/
 
+install_all_laptop: install_alacritty install_bspm install_dunst install_nvim install_picom install_polybar install_rofi install_sxhkd set_wallpaper
+
 get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper
 
 set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper
 
+install_all_pc: install_alacritty install_nvim install_rofi set_wallpaper
+
+get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper
+
+set_all_pc: get_alacritty set_nvim set_rofi set_wallpaper
+
 # ----- alacritty -----
+install_alacritty: set_alacritty
+	yay --noconfirm -S alacritty
+
 get_alacritty:
 	@echo "Getting files from alacritty:"
 	@cp -rv $(local_conf)alacritty/* $(git_conf)alacritty/
@@ -16,6 +27,9 @@ set_alacritty:
 	@cp -rv $(git_conf)alacritty/* $(local_conf)alacritty/
 
 # ----- bspwm -----
+install_bspm: set_bspwm
+	yay --noconfirm -S bspwm
+
 get_bspwm:
 	@echo "Getting files from bspwm:"
 	@cp -rv $(local_conf)bspwm/* $(git_conf)bspwm/
@@ -26,6 +40,9 @@ set_bspwm:
 	@cp -rv $(git_conf)bspwm/* $(local_conf)bspwm/
 
 # ----- dunst -----
+install_dunst: set_dunst
+	yay --noconfirm -S dunst
+
 get_dunst:
 	@echo "Getting files from dunst:"
 	@cp -rv $(local_conf)dunst/* $(git_conf)dunst/
@@ -36,6 +53,9 @@ set_dunst:
 	@cp -rv $(git_conf)dunst/* $(local_conf)dunst/
 
 # ----- nvim -----
+install_nvim: set_nvim
+	yay --noconfirm -S neovim
+
 get_nvim:
 	@echo "Getting files from nvim:"
 	@cp -rv $(local_conf)nvim/* $(git_conf)nvim/
@@ -46,6 +66,9 @@ set_nvim:
 	@cp -rv $(git_conf)nvim/* $(local_conf)nvim/
 
 # ----- picom -----
+install_picom: set_picom
+	yay --noconfirm -S picom
+
 get_picom:
 	@echo "Getting files from picom:"
 	@cp -rv $(local_conf)picom/* $(git_conf)picom/
@@ -56,6 +79,9 @@ set_picom:
 	@cp -rv $(git_conf)picom/* $(local_conf)picom/
 
 # ----- polybar -----
+install_polybar: set_polybar
+	yay --noconfirm -S polybar
+
 get_polybar:
 	@echo "Getting files from polybar:"
 	@cp -rv $(local_conf)polybar/* $(git_conf)polybar/
@@ -66,6 +92,9 @@ set_polybar:
 	@cp -rv $(git_conf)polybar/* $(local_conf)polybar/
 
 # ----- rofi -----
+install_rofi: set_rofi
+	yay --noconfirm -S rofi
+
 get_rofi:
 	@echo "Getting files from rofi:"
 	@cp -rv $(local_conf)rofi/* $(git_conf)rofi/
@@ -76,6 +105,9 @@ set_rofi:
 	@cp -rv $(git_conf)rofi/* $(local_conf)rofi/
 
 # ----- sxhkd -----
+install_sxhkd: set_sxhkd
+	yay --noconfirm -S sxhkd
+
 get_sxhkd:
 	@echo "Getting files from sxhkd:"
 	@cp -rv $(local_conf)sxhkd/* $(git_conf)sxhkd/
