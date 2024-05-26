@@ -1,13 +1,13 @@
 local_conf := ~/.config/
 git_conf := ./config/
 
-install_all_laptop: install_alacritty install_bspm install_dunst install_nvim install_picom install_polybar install_rofi install_sxhkd set_wallpaper
+install_all_laptop: install_yay install_zsh install_alacritty install_bspm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper
 
 get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper
 
 set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper
 
-install_all_pc: install_alacritty install_nvim install_rofi set_wallpaper
+install_all_pc: install_yay install_zsh install_alacritty install_lazygit install_nvim install_ripgrep install_rofi set_wallpaper
 
 get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper
 
@@ -52,6 +52,10 @@ set_dunst:
 	@mkdir -pv $(local_conf)dunst 
 	@cp -rv $(git_conf)dunst/* $(local_conf)dunst/
 
+# ----- lazygit -----
+install_lazygit:
+	yay --noconfirm -S lazygit
+
 # ----- nvim -----
 install_nvim: set_nvim
 	yay --noconfirm -S neovim
@@ -90,6 +94,10 @@ set_polybar:
 	@echo "Setting files for polybar:"
 	@mkdir -pv $(local_conf)polybar 
 	@cp -rv $(git_conf)polybar/* $(local_conf)polybar/
+
+# ----- ripgrep -----
+install_ripgrep:
+	yay --noconfirm -S ripgrep
 
 # ----- rofi -----
 install_rofi: set_rofi
@@ -135,3 +143,11 @@ get_vimrc:
 set_vimrc:
 	@echo "Setting .vimrc:"
 	@cp -v ./config/.vimrc ~/.vimrc
+
+# ----- yay -----
+install_yay:
+	sudo pacman --noconfirm -S yay
+
+# ----- zsh -----
+install_zsh:
+	yay --noconfirm -S zsh
