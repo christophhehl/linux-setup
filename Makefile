@@ -1,17 +1,30 @@
 local_conf := ~/.config/
 git_conf := ./config/
+year := $(shell date +%Y)
 
-install_all_laptop: install_yay install_zsh install_alacritty install_bspm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper
+.PHONY: help $(MAKECMDGOALS)
 
-get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper
+help: ## Prints this text.
+	@echo "Linux setup by Christoph Hehl - $(year)"
+	@echo
+	@cat $(MAKEFILE_LIST) | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@echo
+	@echo "All install rules also copy all respective config files onto your machine."
 
-set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper
+install_all_laptop: install_yay install_zsh install_alacritty install_bspm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
-install_all_pc: install_yay install_zsh install_alacritty install_lazygit install_nvim install_ripgrep install_rofi set_wallpaper
+get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current config files into this git repo (laptop).
 
-get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper
+set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
 
-set_all_pc: get_alacritty set_nvim set_rofi set_wallpaper
+install_all_pc: install_yay install_zsh install_alacritty install_lazygit install_nvim install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
+
+get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper ## Copy all current config files into this git repo (PC).
+
+set_all_pc: get_alacritty set_nvim set_rofi set_wallpaper ## Copy all files from the repo onto your machine (PC).
+
+info: ## Get info on all the other functions.
+	@awk 'BEGIN {printf "\033[36m%-30s\033[0m %s\n", "install_alacritty", "Install alacritty to your system."}'
 
 # ----- alacritty -----
 install_alacritty: set_alacritty
