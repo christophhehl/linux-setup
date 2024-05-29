@@ -23,5 +23,5 @@ help                           Prints this text.
 ```
 
 
-###### by 2024 Christoph Hehl
+###### by Christoph Hehl - 2024
 

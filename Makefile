@@ -2,6 +2,21 @@ local_conf := ~/.config/
 git_conf := ./config/
 year := $(shell date +%Y)
 
+define install_software
+	yay --noconfirm --needed -S $(1)
+endef
+
+define get_config
+	@echo "Getting files from $(1):"
+	cp -rv $(local_conf)$(1)/* $(git_conf)$(1)/
+endef
+
+define set_config
+	@echo "Setting files for $(1):"
+	@mkdir -pv $(local_conf)$(1) 
+	@cp -rv $(git_conf)$(1)/* $(local_conf)$(1)/
+endef
+
 .PHONY: help $(MAKECMDGOALS)
 
 help: ## Prints this text.
@@ -11,15 +26,15 @@ help: ## Prints this text.
 	@echo
 	@echo "All install rules also copy all respective config files onto your machine."
 
-install_all_laptop: install_yay install_zsh install_alacritty install_bspm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
+install_all_laptop: install_yay install_zsh install_alacritty install_bspwm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
-get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current config files into this git repo (laptop).
+get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
 
 set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
 
 install_all_pc: install_yay install_zsh install_alacritty install_lazygit install_nvim install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
 
-get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper ## Copy all current config files into this git repo (PC).
+get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper ## Copy all current configuration files into this git repo (PC).
 
 set_all_pc: get_alacritty set_nvim set_rofi set_wallpaper ## Copy all files from the repo onto your machine (PC).
 
@@ -28,125 +43,98 @@ info: ## Get info on all the other functions.
 
 # ----- alacritty -----
 install_alacritty: set_alacritty
-	yay --noconfirm -S alacritty
+	@$(call install_software,"alacritty")
 
 get_alacritty:
-	@echo "Getting files from alacritty:"
-	@cp -rv $(local_conf)alacritty/* $(git_conf)alacritty/
+	@$(call get_config,"alacritty")
 
 set_alacritty:
-	@echo "Setting files for alacritty:"
-	@mkdir -pv $(local_conf)alacritty 
-	@cp -rv $(git_conf)alacritty/* $(local_conf)alacritty/
+	@$(call set_config,"alacritty")
 
 # ----- bspwm -----
-install_bspm: set_bspwm
-	yay --noconfirm -S bspwm
+install_bspwm: set_bspwm
+	@$(call install_software,"bspwm")
 
 get_bspwm:
-	@echo "Getting files from bspwm:"
-	@cp -rv $(local_conf)bspwm/* $(git_conf)bspwm/
+	@$(call get_config,"bspwm")
 
 set_bspwm:
-	@echo "Setting files for bspwm:"
-	@mkdir -pv $(local_conf)bspwm 
-	@cp -rv $(git_conf)bspwm/* $(local_conf)bspwm/
+	@$(call set_config,"bspwm")
 
 # ----- dunst -----
 install_dunst: set_dunst
-	yay --noconfirm -S dunst
+	@$(call install_software,"dunst")
 
 get_dunst:
-	@echo "Getting files from dunst:"
-	@cp -rv $(local_conf)dunst/* $(git_conf)dunst/
+	@$(call get_config,"dunst")
 
 set_dunst:
-	@echo "Setting files for dunst:"
-	@mkdir -pv $(local_conf)dunst 
-	@cp -rv $(git_conf)dunst/* $(local_conf)dunst/
+	@$(call set_config,"dunst")
 
 # ----- lazygit -----
 install_lazygit:
-	yay --noconfirm -S lazygit
+	@$(call install_software,"lazygit")
 
 # ----- nvim -----
 install_nvim: set_nvim
-	yay --noconfirm -S neovim
+	@$(call install_software,"neovim")
 
 get_nvim:
-	@echo "Getting files from nvim:"
-	@cp -rv $(local_conf)nvim/* $(git_conf)nvim/
+	@$(call get_config,"nvim")
 
 set_nvim:
-	@echo "Setting files for nvim:"
-	@mkdir -pv $(local_conf)nvim 
-	@cp -rv $(git_conf)nvim/* $(local_conf)nvim/
+	@$(call set_config,"nvim")
 
 # ----- picom -----
 install_picom: set_picom
-	yay --noconfirm -S picom
+	@$(call install_software,"picom")
 
 get_picom:
-	@echo "Getting files from picom:"
-	@cp -rv $(local_conf)picom/* $(git_conf)picom/
+	@$(call get_config,"picom")
 
 set_picom:
-	@echo "Setting files for picom:"
-	@mkdir -pv $(local_conf)picom 
-	@cp -rv $(git_conf)picom/* $(local_conf)picom/
+	@$(call set_config,"picom")
 
 # ----- polybar -----
 install_polybar: set_polybar
-	yay --noconfirm -S polybar
+	@$(call install_software,"polybar")
 
 get_polybar:
-	@echo "Getting files from polybar:"
-	@cp -rv $(local_conf)polybar/* $(git_conf)polybar/
+	@$(call get_config,"polybar")
 
 set_polybar:
-	@echo "Setting files for polybar:"
-	@mkdir -pv $(local_conf)polybar 
-	@cp -rv $(git_conf)polybar/* $(local_conf)polybar/
+	@$(call set_config,"polybar")
 
 # ----- ripgrep -----
 install_ripgrep:
-	yay --noconfirm -S ripgrep
+	@$(call install_software,"ripgrep")
 
 # ----- rofi -----
 install_rofi: set_rofi
-	yay --noconfirm -S rofi
+	@$(call install_software,"rofi")
 
 get_rofi:
-	@echo "Getting files from rofi:"
-	@cp -rv $(local_conf)rofi/* $(git_conf)rofi/
+	@$(call get_config,"rofi")
 
 set_rofi:
-	@echo "Setting files for rofi:"
-	@mkdir -pv $(local_conf)rofi 
-	@cp -rv $(git_conf)rofi/* $(local_conf)rofi/
+	@$(call set_config,"rofi")
 
 # ----- sxhkd -----
 install_sxhkd: set_sxhkd
-	yay --noconfirm -S sxhkd
+	@$(call install_software,"sxhkd")
 
 get_sxhkd:
-	@echo "Getting files from sxhkd:"
-	@cp -rv $(local_conf)sxhkd/* $(git_conf)sxhkd/
+	@$(call get_config,"sxhkd")
 
 set_sxhkd:
-	@echo "Setting files for sxhkd:"
-	@mkdir -pv $(local_conf)sxhkd 
-	@cp -rv $(git_conf)sxhkd/* $(local_conf)sxhkd/
+	@$(call set_config,"sxhkd")
 
 # ----- wallpaper -----
 get_wallpaper:
-	@echo "Getting files from wallpaper:"
-	@cp -rv $(local_conf)wallpaper/* $(git_conf)wallpaper/
+	@$(call get_config,"wallpaper")
 
 set_wallpaper:
-	@echo "Setting files for wallpaper:"
-	@mkdir -pv $(local_conf)wallpaper 
-	@cp -rv $(git_conf)wallpaper/* $(local_conf)wallpaper/
+	@$(call set_config,"wallpaper")
 
 # ----- vimrc -----
 get_vimrc:
@@ -162,5 +150,15 @@ install_yay:
 	sudo pacman --noconfirm -S yay
 
 # ----- zsh -----
-install_zsh:
-	yay --noconfirm -S zsh
+install_zsh: set_zshrc
+	@$(call install_software,"zsh")
+
+get_zshrc:
+	@echo "Getting .zshrc:"
+	@cp -v ~/.zshrc ./config/.zshrc
+
+set_zshrc:
+	@echo "Setting .zshrc:"
+	@cp -v ./config/.zshrc ~/.zshrc
+
+
