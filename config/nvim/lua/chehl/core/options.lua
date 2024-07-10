@@ -24,3 +24,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.errorbells = false
 
 opt.history = 1000
+
+opt.spell = true
+
+opt.spelllang = "en_us"
