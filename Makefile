@@ -24,7 +24,7 @@ help: ## Prints this text.
 	@echo
 	@cat $(MAKEFILE_LIST) | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 	@echo
-	@echo "All install rules also copy all respective config files onto your machine."
+	@echo "All install rules also copy all respective configuration files onto your machine."
 
 install_all_laptop: install_yay install_zsh install_alacritty install_bspwm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
@@ -70,6 +70,16 @@ get_dunst:
 
 set_dunst:
 	@$(call set_config,"dunst")
+
+# ----- kitty -----
+install_kitty: set_kitty
+	@$(call install_software,"kitty")
+
+get_kitty:
+	@$(call get_config,"kitty")
+
+set_kitty:
+	@$(call set_config,"kitty")
 
 # ----- lazygit -----
 install_lazygit:
