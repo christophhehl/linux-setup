@@ -139,6 +139,16 @@ get_sxhkd:
 set_sxhkd:
 	@$(call set_config,"sxhkd")
 
+# ----- tmux -----
+install_tmux: set_tmux
+	@$(call install_software,"tmux")
+
+get_tmux:
+	@$(call get_config,"tmux")
+
+set_tmux:
+	@$(call set_config,"tmux")
+
 # ----- wallpaper -----
 get_wallpaper:
 	@$(call get_config,"wallpaper")
