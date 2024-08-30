@@ -26,13 +26,13 @@ help: ## Prints this text.
 	@echo
 	@echo "All install rules also copy all respective configuration files onto your machine."
 
-install_all_laptop: install_yay install_zsh install_bspwm install_dunst install_kitty install_lazygit install_nvim install_ohmyzsh install_p10k install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
+install_all_laptop: install_yay install_zsh install_bspwm install_dunst create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
 get_all_laptop: get_bspwm get_dunst get_kitty get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
 
 set_all_laptop: set_bspwm set_dunst set_kitty set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
 
-install_all_pc: install_yay install_zsh install_kitty install_lazygit install_nvim install_ohmyzsh install_p10k install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
+install_all_pc: install_yay install_zsh create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
 
 get_all_pc: get_kitty get_nvim get_rofi get_wallpaper ## Copy all current configuration files into this git repo (PC).
 
@@ -71,6 +71,18 @@ get_dunst:
 set_dunst:
 	@$(call set_config,"dunst")
 
+# ----- folders -----
+create_folders: 
+	./scripts/create_folders.sh
+
+# ----- jetbrains-font -----
+install_jetbrainsfont:
+	@$(call install_software,"ttf-jetbrains-mono")
+
+# ----- jetbrains-toolbox -----
+install_jetbrainstoolbox:
+	@$(call install_software,"jetbrains-toolbox")
+
 # ----- kitty -----
 install_kitty: set_kitty
 	@$(call install_software,"kitty")
@@ -94,6 +106,13 @@ get_nvim:
 
 set_nvim:
 	@$(call set_config,"nvim")
+
+# ----- oh_my_tmux -----
+get_ohmytmux:
+	@$(call get_config,"tmux")
+
+set_ohmytmux:
+	@$(call set_config,"tmux")
 
 # ----- oh_my_zsh -----
 install_ohmyzsh:
