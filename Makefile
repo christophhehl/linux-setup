@@ -26,17 +26,17 @@ help: ## Prints this text.
 	@echo
 	@echo "All install rules also copy all respective configuration files onto your machine."
 
-install_all_laptop: install_yay install_zsh install_alacritty install_bspwm install_dunst install_lazygit install_nvim install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
+install_all_laptop: install_yay install_zsh install_bspwm install_dunst install_kitty install_lazygit install_nvim install_ohmyzsh install_p10k install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
-get_all_laptop: get_alacritty get_bspwm get_dunst get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
+get_all_laptop: get_bspwm get_dunst get_kitty get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
 
-set_all_laptop: set_alacritty set_bspwm set_dunst set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
+set_all_laptop: set_bspwm set_dunst set_kitty set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
 
-install_all_pc: install_yay install_zsh install_alacritty install_lazygit install_nvim install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
+install_all_pc: install_yay install_zsh install_kitty install_lazygit install_nvim install_ohmyzsh install_p10k install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
 
-get_all_pc: get_alacritty get_nvim get_rofi get_wallpaper ## Copy all current configuration files into this git repo (PC).
+get_all_pc: get_kitty get_nvim get_rofi get_wallpaper ## Copy all current configuration files into this git repo (PC).
 
-set_all_pc: get_alacritty set_nvim set_rofi set_wallpaper ## Copy all files from the repo onto your machine (PC).
+set_all_pc: set_kitty set_nvim set_rofi set_wallpaper ## Copy all files from the repo onto your machine (PC).
 
 info: ## Get info on all the other functions.
 	@awk 'BEGIN {printf "\033[36m%-30s\033[0m %s\n", "install_alacritty", "Install alacritty to your system."}'
@@ -94,6 +94,22 @@ get_nvim:
 
 set_nvim:
 	@$(call set_config,"nvim")
+
+# ----- oh_my_zsh -----
+install_ohmyzsh:
+	./scripts/install_oh_my_zsh.sh
+
+# ----- p10k -----
+install_p10k: set_p10k
+	./scripts/install_powerlevel10k.sh
+
+get_p10k:
+	@echo "Getting .p10k.zsh:"
+	@cp -v ~/.p10k.zsh ./config/.p10k.zsh
+
+set_p10k:
+	@echo "Setting .p10k.zsh:"
+	@cp -v ./config/.p10k.zsh ~/.p10k.zsh
 
 # ----- picom -----
 install_picom: set_picom
