@@ -1,10 +1,17 @@
 #
 # wm independent hotkeys
 #
+super + Escape
+  ~/.config/sxhkd/lock_screen.sh
+  
+
+# screenshot
+super + shift + s
+	xfce4-screenshooter -r -c
 
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 # program launcher
 super + d
@@ -18,7 +25,7 @@ super + ctrl + d
                 -columns 2 -padding 50 -hide-scrollbar -terminal xfce4-terminal \
                 -show-icons -drun-icon-theme "Qogir-dark" -font "Droid Sans Regular 10"
 
-# show ssh sesssions
+# show ssh sessions
 super + shift + d
 	rofi -modi drun -show ssh -line-padding 4 \
                 -columns 2 -padding 50 -hide-scrollbar -terminal xfce4-terminal \
@@ -29,7 +36,7 @@ super + shift + e
      ~/.config/rofi/powermenu.sh
 
 # make sxhkd reload its configuration files:
-super + Escape
+super + shift + Escape
 	pkill -USR1 -x sxhkd
 
 #
@@ -180,3 +187,5 @@ super + n
 
 super + F1
   ~/.config/bspwm/scripts/keybindings_rofi.sh
+
+
