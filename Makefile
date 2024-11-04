@@ -26,11 +26,17 @@ help: ## Prints this text.
 	@echo
 	@echo "All install rules also copy all respective configuration files onto your machine."
 
-install_all_laptop: install_yay install_zsh install_bspwm install_dunst create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
+install_all_bspwm: install_yay install_zsh install_bspwm install_dunst create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_picom install_polybar install_ripgrep install_rofi install_sxhkd set_wallpaper ## Install everything needed on a laptop.
 
-get_all_laptop: get_bspwm get_dunst get_kitty get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
+get_all_bspwm: get_bspwm get_dunst get_kitty get_nvim get_picom get_polybar get_rofi get_sxhkd get_wallpaper ## Copy all current configuration files into this git repo (laptop).
 
-set_all_laptop: set_bspwm set_dunst set_kitty set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
+set_all_bspwm: set_bspwm set_dunst set_kitty set_nvim set_picom set_polybar set_rofi set_sxhkd set_wallpaper ## Copy all files from the repo onto your machine (laptop).
+
+install_all_hyprland: install_yay install_zsh install_dunst create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_ripgrep set_wallpaper ## Install everything needed for hyprland
+
+get_all_hyprland: get_dunst get_kitty get_nvim get_wallpaper ## Copy all current configuration files into this git repo (laptop).
+
+set_all_hyprland: set_dunst set_kitty set_nvim set_wallpaper ## Copy all files from the repo onto your machine (laptop).
 
 install_all_pc: install_yay install_zsh create_folders install_jetbrainsfont install_jetbrainstoolbox install_kitty install_lazygit install_nvim set_ohmytmux install_ohmyzsh install_p10k install_ripgrep install_rofi set_wallpaper ## Install everything needed on a PC.
 
@@ -74,6 +80,38 @@ set_dunst:
 # ----- folders -----
 create_folders: 
 	./scripts/create_folders.sh
+	
+# ----- fuzzel -----
+install_fuzzel: set_fuzzel
+	@$(call install_software,"fuzzel")
+
+get_fuzzel:
+	@$(call get_config,"fuzzel")
+
+set_fuzzel:
+	@$(call set_config,"fuzzel")
+	
+# ----- hyprland -----
+install_hyprland: set_hypr
+	@$(call install_software,"hyprland")
+
+get_hypr:
+	@$(call get_config,"hypr")
+
+set_hypr:
+	@$(call set_config,"hypr")
+
+# ----- hyprlock -----
+install_hyprlock: set_hypr
+	@$(call install_software,"hyprlock")
+	
+# ----- hyprpaper -----
+install_hyprpaper: set_hypr
+	@$(call install_software,"hyprpaper")
+	
+# ----- hyprshot -----
+install_hyprshot:
+	@$(call install_software,"hyprshot")
 
 # ----- jetbrains-font -----
 install_jetbrainsfont:
@@ -190,6 +228,16 @@ get_wallpaper:
 
 set_wallpaper:
 	@$(call set_config,"wallpaper")
+
+# ----- waybar -----
+install_waybar: set_waybar
+	@$(call install_software,"waybar")
+
+get_waybar:
+	@$(call get_config,"waybar")
+
+set_waybar:
+	@$(call set_config,"waybar")
 
 # ----- vimrc -----
 get_vimrc:
