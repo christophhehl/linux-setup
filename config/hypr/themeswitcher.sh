@@ -1,19 +1,24 @@
+find_file ()
+{
+	find "/home/christoph/.config/wallpaper/" -name "$1.*" | head -1
+}
+
+get_full_path ()
+{
+	realpath $1
+}
+
 wallpaper ()
 {
 	hyprctl hyprpaper preload "$1"
 	hyprctl hyprpaper wallpaper ",$1"	
 }
 
-selected=$(echo "Flowers
-City" | fuzzel --dmenu -p "Theme: ")
+selected=$(find "/home/christoph/.config/wallpaper/" -maxdepth 1 -type f -printf '%f\n' | sed 's/\.[^.]*$//' | fuzzel --dmenu -p "Theme: ")
 
-if [ "$selected" = "Flowers" ]
+if [ -z $(find_file "$selected")  ]
 then
-	wallpaper "/home/christoph/.config/wallpaper/1313942.png"
-elif [ "$selected" = "City" ]
-then
-	wallpaper "/home/christoph/.config/wallpaper/1322308.jpeg"
+	echo "File not found."
 else
-	echo "No thme selected."
+	wallpaper $(realpath $(find_file "$selected"))
 fi
-
