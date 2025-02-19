@@ -1,42 +1,79 @@
+@import "frappe.css";
+
+/* FONT */
 * {
-    font-family: JetBrainsMono NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 11px;
+  font-family: JetBrainsMono NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;
 }
 
+/* GENERAL */
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.0);
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
+  background-color: rgba(0, 0, 0, 0.0);
+  color: @text;
+  transition-property: background-color;
+  transition-duration: .5s;
 }
 
+/* COLOR */
+window#waybar.empty #window {
+  background-color: transparent;
+  border: 0px;
+}
+
+#cpu,
+#temperature,
+#memory,
 #clock,
 #battery,
 #network,
 #pulseaudio,
 #tray,
 #window,
+#workspaces button,
 #workspaces {
-    color: #ffffff;
-    background-color: rgba(55, 55, 55, 0.7);
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-#workspaces button {
-    color: #cccccc;
+  color: @text;
+  background-color: @surface2;
 }
 
 #workspaces button.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
-window#waybar.empty #window {
-    background-color: transparent;
-    border: 0px;
+#network.disconnected {
+  color: @base;
+  background-color: @red;
 }
 
+#battery.charging,
+#battery.plugged {
+  background-color: @green;
+  color: @base;
+}
+
+@keyframes blink {
+  to {
+    background-color: @red;
+    color: @base;
+  }
+}
+
+#battery.critical:not(.charging) {
+  background-color: @surface2;
+  color: @text;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#tray>.needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @yellow;
+}
+
+/* PADDING */
 #pulseaudio,
 #network,
 #battery,
@@ -44,83 +81,27 @@ window#waybar.empty #window {
 #tray,
 #window,
 #workspaces {
-    border-radius: 10;
-    border-color: #444444;
-    border: 1px solid;
+  border-radius: 10;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #cpu {
-    color: #ffffff;
-    background-color: rgba(55, 55, 55, 0.7);
-    padding-left: 10px;
-    border-radius: 10px 0px 0px 10px;
-    border-color: #444444;
-    border-left: 1px solid;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+  padding-left: 10px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 #temperature {
-    color: #ffffff;
-    background-color: rgba(55, 55, 55, 0.7);
-    padding-right: 10px;
-    border-radius: 0px 10px 10px 0px;
-    border-color: #444444;
-    border-right: 1px solid;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+  padding-right: 10px;
+  border-radius: 0px 10px 10px 0px;
 }
 
 #memory {
-    color: #ffffff;
-    background-color: rgba(55, 55, 55, 0.7);
-    padding-left: 10px;
-    padding-right: 10px;
-    border-color: #444444;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-}
-
-#temperature.critical {
-    background-color: #eb4d4b;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #network,
 #battery {
-    padding-right: 15px;
-}
-
-#network.disconnected {
-    background-color: #f53c3c;
-}
-
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+  padding-right: 15px;
 }
