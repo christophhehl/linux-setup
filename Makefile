@@ -156,6 +156,12 @@ set_ohmytmux:
 install_ohmyzsh:
 	./scripts/install_oh_my_zsh.sh
 
+get_ohmyzsh:
+	@$(call get_config,"ohmyzsh")
+
+set_ohmyzsh:
+	@$(call set_config,"ohmyzsh")
+
 # ----- p10k -----
 install_p10k: set_p10k
 	./scripts/install_powerlevel10k.sh
